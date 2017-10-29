@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--get注入-->
+    <bean id="action" class="com.kaishengit.test.Person" />
+    <bean id="work" class="com.kaishengit.test.Work">
+        <property name="action" ref="action"/>
+    </bean>
+
+
+    <!--配置通知类-->
+    <bean id="aopAdvice" class="com.kaishengit.test.AopAdvice"/>
+
+    <aop:config>
+        <aop:aspect ref="aopAdvice">
+            <!-- 切入点表达式  * com.kaishengit.test..*.*(..)-->
+            <!--* 不限制返回类型  ..本包及其子包 *所有类 .*里面所有方法 ..参数列表不限-->
+            <aop:pointcut id="pointcut" expression="execution(* com.kaishengit.test..*.*(..))"/>
+            <!--id为任意名-->
+            <aop:around method="aroundAdvice" pointcut-ref="pointcut"/>
+            <!--method通知类的方法名 pointcut为切入点id -->
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>
