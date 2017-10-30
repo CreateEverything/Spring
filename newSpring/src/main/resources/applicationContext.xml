@@ -5,4 +5,14 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--将类交给spring容器管理-->
     <bean name="user" class="com.kaishengit.service.User"/>
+    <!--别名-->
+    <!--<alias name="user" alias="myUser"/>-->
+    <!--从spring中获取的对象都是单例  bean的scope属性默认是singleton -->
+    <!--如果想要每次取出来的都是不同的对象的时候  将scope属性设置为prototype-->
+    <!--scope属性为prototype的类的对象在使用时才会被创建（懒加载）-->
+    
+    <!--懒加载-->
+    <!--放入Spring容器的Bean在容器启动时创建对象-->
+    <!--lazy-init 属性设置为true 默认是false-->
+
 </beans>
