@@ -18,9 +18,9 @@ public class JdbcTest {
     @Test
     public void saveTest(){
         Book book = new Book();
-        book.setBookName("a");
-        book.setBookAuthor("b");
-        book.setBookType("c");
+        book.setBookName("龙族");
+        book.setBookAuthor("江南");
+        book.setBookType("连载小说");
         bookService.save(book);
     }
     @Test
