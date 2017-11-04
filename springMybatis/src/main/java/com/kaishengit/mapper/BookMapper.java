@@ -4,9 +4,9 @@ import com.kaishengit.entity.Book;
 import com.kaishengit.entity.BookExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public interface BookMapper {
     long countByExample(BookExample example);
 

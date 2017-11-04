@@ -1,8 +1,6 @@
 package com.kaishengit.test;
 
 
-import com.kaishengit.entity.Book;
-import com.kaishengit.mapper.BookMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
