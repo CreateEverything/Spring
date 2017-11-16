@@ -26,7 +26,7 @@ public interface BookMapper {
 
     int updateByExample(@Param("record") Book record, @Param("example") BookExample example);
 
-    int updateByPrimaryKeySelective(Book record);
+    int updateByPrimaryKeySelective(Book book);
 
     int updateByPrimaryKey(Book record);
 }

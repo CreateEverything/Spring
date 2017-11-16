@@ -28,8 +28,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void update(Book book) {
-        bookMapper.updateByPrimaryKeySelective(book);
+        bookMapper.updateByPrimaryKey(book);
+        System.out.println(book.getBookName());
 //      修改失败
+
+
     }
 
     @Override
