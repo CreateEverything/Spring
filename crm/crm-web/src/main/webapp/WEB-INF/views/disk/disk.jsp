@@ -12,6 +12,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
     <link rel="stylesheet" href="/static/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet" href="/static/plugins/layer/mobile/need/layer.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -37,39 +38,52 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">公司网盘</h3>
                 </div>
+
+                    <button class="btn btn-danger" ><i class="fa fa-arrow-left">　</i>返回上一级</button>
+
                 <div class="box-tools pull-right">
-                    <button class="btn btn-danger" style="display: inline-block;margin-top: -34px;padding: 9px"><i class="fa fa-arrow-left"></i>返回上一级</button>
-                    <div id="picker" style="display: inline-block"><i class="fa fa-file-excel-o"></i> 上传文件</div>
+
+                    <button class="btn btn-success" style="display: inline-block;margin-top: -34px;padding: 9px"><i class="fa fa-folder">　</i>新建文件夹</button>
+
+                    <div id="picker" style="display: inline-block"><i class="fa fa-file-excel-o">　</i> 上传文件</div>
                 </div>
                 <table class="table table-hover">
-                    <c:choose>
-                        <c:when test="${not empty diskList}">
-                            <tbody>
-                            <tr>
-                                <td width="10px"></td>
-                                <td><i class="fa fa-folder fa-3x" aria-hidden="true"></i></td>
-                                <td>文件名</td>
-                                <td>文件大小</td>
-                                <td>文件创建时间</td>
-                            </tr>
-                            <c:forEach items="${diskList}" var="disk">
-                                <tr>
-                                    <td></td>
-                                    <td><i class="fa fa-file fa-3x" aria-hidden="true"></i></td>
-                                    <td>${disk.name}</td>
-                                    <td>${disk.size}</td>
-                                    <td>${disk.updateTime}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="alert alert-danger" role="alert">
-                                <div style="padding-left: 500px">暂无客户数据</div>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
+                    <c:if test="${not empty diskList}">
+                        <tbody>
+                        <tr>
+                            <td width="10px"></td>
+                            <td></td>
+                            <td>文件名</td>
+                            <td>文件大小</td>
+                            <td>文件创建时间</td>
+                        </tr>
+                        <c:forEach items="${diskList}" var="disk">
+                            <tr class="fileList">
+                                <td></td>
+                                <c:if test="${disk.type != 'dir'}">
+                                    <td><i class="fa fa-file fa-3x" aria-hidden="true"></i></td>
+                                </c:if>
+                                <c:if test="${disk.type == 'dir'}">
+                                    <td><i class="fa fa-folder fa-3x" aria-hidden="true"></i></td>
+                                </c:if>
+                                <td style="font-size: 30px">${disk.name}</td>
+                                <td style="font-size: 30px">${disk.size}</td>
+                                <td style="font-size: 30px"><fmt:formatDate value="${disk.updateTime}"/></td>
+                                <td>
+                                    <c:if test="${disk.type != 'dir'}">
+                                        <button  class="layui-btn layui-btn-warm"  >下载</button>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </c:if>
+                    <c:if test="${empty diskList}">
+                        <div class="alert alert-danger" role="alert" style="margin-top: 40px">
+                            <div style="padding-left: 500px">网盘中空空如也~~~</div>
+                        </div>
+                    </c:if>
                 </table>
                 <%--文件--%>
 
@@ -98,6 +112,9 @@
             server:'/dropbox/fileUpload',
             auto:true,
             fileVal:'file',
+        });
+        $(".fileList").mouseenter(function(){
+            $(".layui-btn layui-btn-warm").show();
         });
     })()
 </script>

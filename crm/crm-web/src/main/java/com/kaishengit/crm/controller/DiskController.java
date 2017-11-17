@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,10 +17,10 @@ public class DiskController {
     @Autowired
     DiskService diskService;
 
-    @GetMapping("/home")
-    public String toMyDisk(Model model){
-        //获取数据库中的所有文件
-        List<Disk> diskList = diskService.findAllFile();
+    @GetMapping("/home/{pid}")
+    public String toMyDisk(Model model, @PathVariable Integer pid){
+        //获取数据库中的文件
+        List<Disk> diskList = diskService.findFileByPid(pid);
         model.addAttribute("diskList",diskList);
         return "/disk/disk";
     }

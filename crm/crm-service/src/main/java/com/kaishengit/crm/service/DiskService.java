@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DiskService {
     List<Disk> findAllFile();
+
+    List<Disk> findFileByPid(Integer pid);
 }

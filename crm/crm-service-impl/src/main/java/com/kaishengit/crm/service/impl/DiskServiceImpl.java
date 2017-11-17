@@ -17,4 +17,11 @@ public class DiskServiceImpl implements DiskService{
     public List<Disk> findAllFile() {
         return diskMapper.selectByExample(new DiskExample());
     }
+
+    @Override
+    public List<Disk> findFileByPid(Integer pid) {
+        DiskExample diskExample = new DiskExample();
+        diskExample.createCriteria().andPidEqualTo(pid);
+        return diskMapper.selectByExample(diskExample);
+    }
 }
