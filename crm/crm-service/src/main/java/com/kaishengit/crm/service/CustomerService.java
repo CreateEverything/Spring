@@ -1,9 +1,11 @@
 package com.kaishengit.crm.service;
 
 import com.kaishengit.crm.entity.Customer;
-import com.kaishengit.crm.exception.ServiceException;
 
+
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerService {
     List<Customer> findAllCustomerByAccountId(int accountId);
@@ -36,4 +38,5 @@ public interface CustomerService {
 
     List<Customer> findAllPublicCustomer();
 
+    List<Map<String,Object>> findCustomerCountByTime();
 }

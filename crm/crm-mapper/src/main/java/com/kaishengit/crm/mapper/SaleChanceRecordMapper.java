@@ -2,7 +2,12 @@ package com.kaishengit.crm.mapper;
 
 import com.kaishengit.crm.entity.SaleChanceRecord;
 import com.kaishengit.crm.example.SaleChanceRecordExample;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 public interface SaleChanceRecordMapper {
@@ -27,4 +32,6 @@ public interface SaleChanceRecordMapper {
     int updateByPrimaryKeySelective(SaleChanceRecord record);
 
     int updateByPrimaryKey(SaleChanceRecord record);
+
+    Map<String,Object> findChanceCountByTime(Date date,@Param("content") String content);
 }

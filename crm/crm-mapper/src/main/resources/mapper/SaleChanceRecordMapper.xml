@@ -193,4 +193,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findChanceCountByTime" parameterType="com.kaishengit.crm.example.SaleChanceRecordExample" resultType="java.util.Map">
+      SELECT
+          content,
+          count(content) as 'count'
+      FROM
+          sale_chance_record
+      WHERE
+          content = #{content,jdbcType=VARCHAR}
+  </select>
 </mapper>

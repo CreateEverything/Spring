@@ -107,8 +107,8 @@ public class ChanceController {
         saleChanceRecordService.updateProgress(saleId,progress);
         return "redirect:/chance/"+saleChanceId+"/info";
     }
-    @PostMapping("/my/{saleChanceId}/new/record")
-    public String updateProgress(@PathVariable Integer saleChanceId,String context){
+    @GetMapping("/my/{saleChanceId}/new/record/{context}")
+    public String updateProgress(@PathVariable Integer saleChanceId,@PathVariable String context){
         //1.新增进度信息
         saleChanceRecordService.saveContext(context,saleChanceId);
         return "redirect:/chance/"+saleChanceId+"/info";

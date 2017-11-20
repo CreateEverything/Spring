@@ -57,7 +57,7 @@
             </li>
 
 
-            <li class="${param.menu=='dropbox'?'active':''}"><a href="/disk/home"><i class="fa fa-share-alt"></i> <span>公司网盘</span></a></li>
+            <li class="${param.menu=='dropbox'?'active':''}"><a href="/disk/company/0"><i class="fa fa-share-alt"></i> <span>公司网盘</span></a></li>
             <li class="header">系统管理</li>
             <!-- 部门员工管理 -->
             <li class="${param.menu=='employeeList'? 'active':'' }"><a href="/employee"><i class="fa fa-users"></i> <span>员工管理</span></a></li>

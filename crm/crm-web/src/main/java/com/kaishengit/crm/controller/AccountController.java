@@ -2,15 +2,20 @@ package com.kaishengit.crm.controller;
 
 import com.kaishengit.crm.entity.Account;
 import com.kaishengit.crm.entity.Dept;
+import com.kaishengit.crm.entity.SaleChanceRecord;
 import com.kaishengit.crm.exception.AuthenticationException;
 import com.kaishengit.crm.exception.ServiceException;
 import com.kaishengit.crm.service.AccountService;
+import com.kaishengit.crm.service.CustomerService;
 import com.kaishengit.crm.service.DeptService;
+import com.kaishengit.crm.service.SaleChanceRecordService;
 import com.kaishengit.web.result.AjaxResult;
 import com.kaishengit.web.result.DataTablesResult;
+import com.mysql.fabric.xmlrpc.base.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +37,10 @@ public class AccountController {
     AccountService accountService;
     @Autowired
     DeptService deptService;
+    @Autowired
+    SaleChanceRecordService saleChanceRecordService;
+    @Autowired
+    CustomerService customerService;
 
     @GetMapping("/login")
     public String UserLogin() {
@@ -64,7 +74,16 @@ public class AccountController {
      * @return
      */
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        Date date = null;
+
+        //查询各个进程的数量并封装到一个List中
+        //梯形表(业务进度)todo 可根据时间再做拓展
+        List<Map<String,Object>> chanceList  = saleChanceRecordService.findAllChanceAddToList(date);
+        //折线图(每月新增客户次数)
+        List<Map<String,Object>> customerList  = customerService.findCustomerCountByTime();
+        model.addAttribute("customerList",customerList);
+        model.addAttribute("chanceList",chanceList);
         return "home";
     }
 

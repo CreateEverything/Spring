@@ -29,7 +29,17 @@ public class Disk implements Serializable {
 
     private String md5;
 
+    private String newTime;
+
     private static final long serialVersionUID = 1L;
+
+    public String getNewTime() {
+        return newTime;
+    }
+
+    public void setNewTime(String newTime) {
+        this.newTime = newTime;
+    }
 
     public Integer getId() {
         return id;

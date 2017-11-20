@@ -367,4 +367,12 @@
       reminder = #{reminder,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findCustomerCountByTime" parameterType="com.kaishengit.crm.example.CustomerExample" resultType="java.util.Map">
+      SELECT
+          count(*) as 'count'
+      FROM
+          `t_customer`
+      WHERE
+          t_customer.create_time LIKE #{time};
+  </select>
 </mapper>

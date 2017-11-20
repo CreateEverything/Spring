@@ -18,8 +18,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerImpl implements CustomerService {
@@ -157,4 +159,24 @@ public class CustomerImpl implements CustomerService {
         return customerList;
     }
 
+    @Override
+    public List<Map<String, Object>> findCustomerCountByTime() {
+        int month = 12;
+        String time = "";
+        List<Map<String, Object>> list = new ArrayList();
+        for(int i = 1;i<=month;i++){
+            if(i<10){
+                time = "2017-0"+i+"-%";
+            }else{
+                time = "2017-"+i+"-%";
+            }
+            System.out.println(time+"******************************");
+            Map<String ,Object> map = customerMapper.findCustomerCountByTime(time);
+            if(map!=null&&!map.isEmpty()){
+                map.put("month",i+"月");
+                list.add(map);
+            }
+        }
+        return list;
+    }
 }

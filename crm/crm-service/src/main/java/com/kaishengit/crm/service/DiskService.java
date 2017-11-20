@@ -8,4 +8,6 @@ public interface DiskService {
     List<Disk> findAllFile();
 
     List<Disk> findFileByPid(Integer pid);
+
+    void createDir(Integer pid, String dirName,Integer AccountId);
 }

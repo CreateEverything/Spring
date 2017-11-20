@@ -1,6 +1,6 @@
 package com.kaishengit.fastdfs;
 
-import com.sun.deploy.util.SessionState;
+
 import org.apache.commons.io.IOUtils;
 import org.csource.common.MyException;
 import org.csource.fastdfs.ClientGlobal;
@@ -9,11 +9,10 @@ import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 import org.junit.Test;
 
-import java.awt.geom.GeneralPath;
 import java.io.*;
 import java.util.Properties;
 
-import static org.apache.commons.io.IOUtils.toByteArray;
+
 
 
 public class FastdfsServerTest {

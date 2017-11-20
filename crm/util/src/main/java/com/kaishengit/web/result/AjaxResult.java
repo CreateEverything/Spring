@@ -27,7 +27,6 @@ public class AjaxResult {
         ajaxResult.setMessage(message);
         return ajaxResult;
     }
-
     private String state;
     private String message;
     private Object data;

@@ -2,7 +2,9 @@ package com.kaishengit.crm.service;
 
 import com.kaishengit.crm.entity.SaleChanceRecord;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface SaleChanceRecordService {
     /**
@@ -15,6 +17,9 @@ public interface SaleChanceRecordService {
     void updateProgress(Integer saleId, String progress);
 
     void saveContext(String context, Integer saleChanceId);
+
+
+    List<Map<String,Object>> findAllChanceAddToList(Date date);
 }
 
 

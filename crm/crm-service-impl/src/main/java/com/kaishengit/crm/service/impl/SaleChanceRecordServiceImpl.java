@@ -11,8 +11,10 @@ import com.kaishengit.crm.service.SaleChanceRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SaleChanceRecordServiceImpl implements SaleChanceRecordService{
@@ -64,5 +66,38 @@ public class SaleChanceRecordServiceImpl implements SaleChanceRecordService{
         Customer customer = customerMapper.selectByPrimaryKey(saleChance.getAccountId());
         customer.setLastChatTime(saleChanceRecord.getCreateTime());
         customerMapper.updateByPrimaryKey(customer);
+    }
+
+    /**
+     * 根据时间查询所有的机会进程
+     * @param date
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> findAllChanceAddToList(Date date) {
+
+
+        List<String> contentList = new ArrayList();
+        contentList.add("将当前进度修改为 [初访]");
+        contentList.add("将当前进度修改为 [意向]");
+        contentList.add("将当前进度修改为 [报价]");
+        contentList.add("将当前进度修改为 [成交]");
+        contentList.add("将当前进度修改为 [暂时搁置]");
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        for(String content : contentList){
+
+            //首先判断进度是否存在表中
+            SaleChanceRecordExample saleChanceRecordExample = new SaleChanceRecordExample();
+            saleChanceRecordExample.createCriteria().andContentEqualTo(content);
+            List<SaleChanceRecord> saleChanceRecordList = saleChanceRecordMapper.selectByExample(saleChanceRecordExample);
+            if(saleChanceRecordList!=null&&!saleChanceRecordList.isEmpty()){
+                Map<String ,Object> objectMap = saleChanceRecordMapper.findChanceCountByTime(date,content);
+                String oldContent = (String)objectMap.get("content");
+                String newContent = oldContent.substring(oldContent.indexOf('[')+1,oldContent.lastIndexOf(']'));
+                objectMap.put("content",newContent);
+                mapList.add(objectMap);
+            }
+        }
+        return mapList;
     }
 }

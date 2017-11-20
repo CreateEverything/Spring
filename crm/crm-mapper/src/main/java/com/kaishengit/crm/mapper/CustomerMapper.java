@@ -6,6 +6,7 @@ import com.kaishengit.crm.example.CustomerExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerMapper {
     long countByExample(CustomerExample example);
@@ -29,4 +30,7 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    Map<String,Object> findCustomerCountByTime(@Param("time") String time);
+
 }

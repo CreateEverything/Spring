@@ -249,7 +249,7 @@
     (function(){
         $("#showRecordModalBtn").click(function(){
             layer.prompt({title: '添加新的跟进记录。', formType: 2}, function(pass, index){
-                $("#recordForm").submit();
+                window.location.href = "/chance/my/${saleChance.id}/new/record/"+pass;
                 layer.close(index);
             });
         });
