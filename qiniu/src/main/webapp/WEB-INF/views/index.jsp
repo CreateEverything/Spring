@@ -13,7 +13,11 @@
 </head>
 <body>
 <div style=" width: 800px; margin-left: 400px;margin-top: 100px">
-    
+    <form method="post" action="http://upload.qiniu.com/" enctype="multipart/form-data">
+        <input name="token" type="text" hidden value="${upToken}">
+        选择文件:<input name="file" type="file">
+        <button>上传文件</button>
+    </form>
 </div>
 
 
