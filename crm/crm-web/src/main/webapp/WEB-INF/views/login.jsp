@@ -36,12 +36,12 @@
         </c:if>
         <form action="/login" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="110">
+                <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="1233333">
                 <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
 
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="password" value="123">
+                <input type="password" class="form-control" placeholder="Password" name="password" value="000000">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">

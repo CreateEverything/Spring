@@ -37,7 +37,7 @@
                     <div class="box">
                         <div class="box-body">
                             <button class="btn btn-default" id="addDept">添加部门</button>
-                            <input type="hidden" id="deptId" >
+                            <input type="hidden" id="deptId">
                             <ul id="ztree" class="ztree"></ul>
                         </div>
                     </div>
@@ -49,7 +49,6 @@
                             <h3 class="box-title">员工管理</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool"  id="addEmployee" title="Collapse">
-
                                     <i class="fa fa-plus"></i> 添加员工</button>
                             </div>
                         </div>
@@ -140,13 +139,17 @@
                 });
             });
         });
-
-
-        //左侧树
-        $("#addDept").click(function () {
+//        添加部门
+        $(document).delegate("#addDept","click",function(){
+            var pid = $("#deptId").val();
+            //解决当不点击zTree的时候获取不到pid的值
+            if(!pid){
+                pid = 1;
+            }
             layer.prompt({title:"请输入部门名称"},function(text,index){
                 layer.close(index);
-                $.post("/employee/dept/new",{"deptName":text}).done(function(data) {
+
+                $.post("/employee/dept/new/"+pid,{"deptName":text}).done(function(data) {
                     if(data.state == "success") {
                         layer.msg("添加部门成功");
                         //刷新树
@@ -160,6 +163,7 @@
                 });
             });
         });
+
 
 
         $("#addEmployee").click(function(){

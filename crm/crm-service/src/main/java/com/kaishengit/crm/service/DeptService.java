@@ -9,5 +9,5 @@ public interface DeptService {
 
     List<Dept> findByAccountId(int accountId);
 
-    void saveNewDept(String deptName);
+    Integer saveNewDept(String deptName,Integer pid);
 }

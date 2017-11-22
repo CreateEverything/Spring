@@ -2,16 +2,25 @@ package com.kaishengit.controller;
 
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import org.springframework.beans.factory.annotation.Value;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class IndexController {
-    String accessKey = "AopW6jDWoGJM_HjV3zaA1Rr77Tl_pgkK2KnNy5ZK";
-    String secreKey = "o1zzCmG_JalqW2QcGuXI8oec1HSq0KJfflJOZp0D";
-    String bucket = "qiniu";
+    @Value("${qiniu.accessKey}")
+    private String accessKey;
+    @Value("qiniu.secreKey")
+    private String secreKey;
+    @Value("${qiniu.bucket}")
+    private String bucket;
+
+    @Value("${crop}")
+    private String crop;
 
     @GetMapping("/index")
     public String index (Model model){

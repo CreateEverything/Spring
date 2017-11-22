@@ -111,7 +111,7 @@
     values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptPid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.kaishengit.crm.entity.Dept">
+  <insert id="insertSelective" parameterType="com.kaishengit.crm.entity.Dept" useGeneratedKeys="true" keyProperty="deptId">
     insert into t_dept
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="deptId != null">

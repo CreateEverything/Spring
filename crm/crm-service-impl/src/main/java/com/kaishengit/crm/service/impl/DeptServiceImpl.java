@@ -30,7 +30,7 @@ public class DeptServiceImpl implements DeptService{
     }
 
     @Override
-    public void saveNewDept(String deptName) {
+    public Integer saveNewDept(String deptName,Integer pid) {
         //1.查询该部门名称是否存在
         DeptExample deptExample = new DeptExample();
         deptExample.createCriteria().andDeptNameEqualTo(deptName);
@@ -41,8 +41,8 @@ public class DeptServiceImpl implements DeptService{
         }
         Dept dept = new Dept();
         dept.setDeptName(deptName);
-        dept.setDeptPid(1);
-        deptMapper.insert(dept);
-
+        dept.setDeptPid(pid);
+        deptMapper.insertSelective(dept);
+        return dept.getDeptId();
     }
 }

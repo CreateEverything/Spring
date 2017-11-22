@@ -11,6 +11,8 @@ import com.kaishengit.crm.service.DeptService;
 import com.kaishengit.crm.service.SaleChanceRecordService;
 import com.kaishengit.web.result.AjaxResult;
 import com.kaishengit.web.result.DataTablesResult;
+import com.kaishengit.weixin.WeixinUtil;
+import com.kaishengit.weixin.exception.WeiXinException;
 import com.mysql.fabric.xmlrpc.base.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +44,6 @@ public class AccountController {
     SaleChanceRecordService saleChanceRecordService;
     @Autowired
     CustomerService customerService;
-
     @GetMapping("/login")
     public String UserLogin() {
         return "login";
@@ -161,16 +163,21 @@ public class AccountController {
      * 添加新部门
      * @return
      */
-    @PostMapping("/employee/dept/new")
+    @PostMapping("/employee/dept/new/{pid}")
     @ResponseBody
-    public AjaxResult saveNewDept(String deptName){
+    public AjaxResult saveNewDept(String deptName,@PathVariable Integer pid){
         try{
+//      存入数据库中
+            Integer deptId = deptService.saveNewDept(deptName,pid);
 
-            deptService.saveNewDept(deptName);
+            //      同步到企业微信中
+            WeixinUtil weixinUtil = new WeixinUtil();
 
-        }catch (ServiceException se){
+            weixinUtil.createDept(deptName,pid,deptId);
 
-            return AjaxResult.error(se.getMessage());
+        }catch (IOException e){
+
+            return AjaxResult.error(e.getMessage());
 
         }
 
@@ -179,8 +186,6 @@ public class AccountController {
     @PostMapping("/employee/{accountId:\\d+}/delete")
     @ResponseBody
     public AjaxResult deleteEmployee(@PathVariable int accountId){
-        System.out.println("*****************************");
-        System.out.println(accountId);
         //删除该员工所有信息
         accountService.deleteAccount(accountId);
         return AjaxResult.success();

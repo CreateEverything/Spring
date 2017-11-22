@@ -38,7 +38,7 @@
             <div class="box-tools pull-right">
 
                 <button id="createDir" class="btn btn-success" style="display: inline-block;margin-top: -34px;padding: 9px" ><i class="fa fa-folder">　</i>新建文件夹</button>
-                <div id="picker" style="display: inline-block"><i class="fa fa-file-excel-o">　</i> 上传文件</div>
+                <div id="picker"  style="display: inline-block"><i class="fa fa-file-excel-o"></i> 上传文件</div>
             </div>
             <section id="content" style="background-color: #ecf0f5;width: 1240px;margin-left: -20px;margin-top: 10px">
                 <c:forEach items="${diskList}" var="disk">
@@ -109,10 +109,22 @@
         var uploader = WebUploader.create({
             pick: '#picker',
             swf: '/static/plugins/webuploader/Uploader.swf',
-            server: '/dropbox/fileUpload',
+            server: 'http://upload.qiniup.com',
             auto: true,
             fileVal: 'file',
+            formData:{
+                'token':'${upToken}'
+            },
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
         });
+
+
+
+
         $("#returnBtn").click(function(){
             history.back(-1);
         })
